@@ -99,6 +99,10 @@
         <ion-item>
           <ion-title>Add Assessment</ion-title>
         </ion-item>
+        @if(loading()==true){
+          <p class="ion-text-center">We are processing your CT image</p>
+
+        }
         @if(invalidImage()==true){
           <div class="ion-text-center"> Invalid Image submitted</div>
         }
@@ -108,7 +112,7 @@
             @if(imageSelected()==false){
               <ion-button (click)="fileInput.click()" shape="round">Add CT slice</ion-button>
             }
-            
+
             @if(imageSelected()==true){
               @if(imagePreview()){
                 <ion-img [src]="imagePreview()" class="preview-image"></ion-img>

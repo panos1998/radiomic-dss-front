@@ -61,7 +61,8 @@ export class Assesments implements OnInit, OnDestroy {
   imagePreview:WritableSignal<string  | null> = signal(null)
   selectedImage: any;
   invalidImage: WritableSignal<boolean> = signal(false);
-  markdownConverter = inject(MarkdownConverterService)
+  markdownConverter = inject(MarkdownConverterService);
+  loading: WritableSignal<boolean> = signal(false);
 
 
 
@@ -147,6 +148,7 @@ export class Assesments implements OnInit, OnDestroy {
     formData.append('patient_id', patientId || '');
     console.log("patientId", patientId)
     this.invalidImage.set(false);
+    this.loading.set(true);
     if(patientId){
      this.assessmentsService.postPatientAssessment(formData).subscribe({
       next: (response:any) =>{
@@ -168,7 +170,8 @@ export class Assesments implements OnInit, OnDestroy {
           this.patientAssessments.set([
             ...this.patientAssessments(),
             ...(this.selectedAssessment() ? [this.selectedAssessment()!] : [])
-          ]);         
+          ]);      
+          this.loading.set(false);   
         }
       },
       error:(error) => console.log("error")
