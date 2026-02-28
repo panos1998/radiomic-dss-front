@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      PancrAIas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-patient-table></app-patient-table>
+  @if(patientChangedSignal()){
+    <app-assesments>
+    {{ patientChangedSignal()?.valueOf()}}
+    </app-assesments>
+  }
+</ion-content>
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-grid>  
+      <ion-row class="ion-justify-content-around">
+        <ion-col size="auto">
+          <div class="image-container">
+          <ion-img src="logos/authred.png"></ion-img>
+          </div>
+        </ion-col>
+        <ion-col size="auto">
+          <p>All rights reserved ©</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,138 @@
+<ion-grid>
+  <ion-row>
+    @if(selectedPatient(); as patient) {
+    <ion-col size="12" [@slideUp]="patient.id">
+      <div class="title-container">
+        <ion-title class="">{{ patient.name }}'s Assessments</ion-title>
+        <ion-button class="add-assessment-btn" (click)="showAddAssessment()">
+          <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-col>
+    <ion-col size="12" class="ion-padding-start ion-padding-end" [@slideUp]="patient.id">
+      <ion-grid [@cardAnimation]="patientAssessments()">
+        <ion-row>
+          @for(assessment of patientAssessments(); track assessment.id) {
+          <ion-col size="12" size-md="6" size-lg="4">
+            <ion-card class="assessment-card" (click)="showAssesment(assessment)">
+              <ion-card-header>
+                <ion-card-title>Score: {{ assessment.score }}</ion-card-title>
+                <ion-card-subtitle>{{ assessment.date | date: 'longDate' }}</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                <p [innerHTML]="getSafeNotes(getFirstNWords(assessment.notes))"></p>                <div class="heatmap-container">
+                  <img [src]="assessment.heatmapURL" alt="Heatmap" class="heatmap-image">
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          } @empty {
+            @if(!assessmentsLoading()){
+            <ion-col size="12">
+              <div class="ion-padding ion-text-center">
+                <p>No assessments for the selected patient</p>
+              </div>
+            </ion-col>
+            }
+          }
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+    } @else {
+    <ion-col size="12">
+      <div class="no-patient-selected">
+        <h2>Please select a patient to view their assessments.</h2>
+      </div>
+    </ion-col>
+    }
+  </ion-row>
+</ion-grid>
+
+<ion-modal class="fullscreen" [isOpen]="isModalOpen()">
+  <ng-template>
+    
+    <ion-header>
+      <ion-toolbar>
+        @if(selectedPatient(); as selectedPatient) {
+        <ion-title>{{selectedPatient.name}}</ion-title>
+        }
+        <ion-buttons slot="end">
+          <ion-button (click)="setOpen(false); resetImage(fileInput)">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      
+      @if(modalMode()=='view'){
+        @if(selectedPatient(); as selectedPatient) {
+        <ion-item>
+          <ion-list lines="none">
+            <ion-item><ion-title>Patient Details</ion-title></ion-item>
+            <ion-item>
+              <ion-label>Age: {{selectedPatient.age}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>Gender: {{selectedPatient.gender}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-item>
+        }
+        @if(selectedAssessment(); as selectedAssessment){
+        <ion-item>
+          <ion-title>Score: {{selectedAssessment.score}}</ion-title> 
+        </ion-item>
+        <ion-item>
+          <ion-list lines="none">
+            <ion-title>AI explanation</ion-title>
+            <ion-item ><p [innerHTML]="getSafeNotes(selectedAssessment.notes)"></p></ion-item>
+          </ion-list>
+        </ion-item>
+        <ion-item><ion-title>GradCam Activation heatmap</ion-title></ion-item>
+        <div class="heatmap-full-container">
+          <ion-img class="heatmap-full" [src]="selectedAssessment.heatmapURL"></ion-img>
+        </div>
+        }
+      } 
+      
+      @else {
+        <ion-item>
+          <ion-title>Add Assessment</ion-title>
+        </ion-item>
+        @if(invalidImage()==true){
+          <div class="ion-text-center"> Invalid Image submitted</div>
+        }
+        <div class="add-image-container">
+          <div class="ion-text-center add-image-placeholder">
+            
+            @if(imageSelected()==false){
+              <ion-button (click)="fileInput.click()" shape="round">Add CT slice</ion-button>
+            }
+            
+            @if(imageSelected()==true){
+              @if(imagePreview()){
+                <ion-img [src]="imagePreview()" class="preview-image"></ion-img>
+              }
+            }
+          </div>
+        </div>
+
+        @if(imageSelected()==true){
+          <div class="ion-text-center ion-padding">
+            <ion-button shape="round" color="success" (click)="submitAssessment()">Upload</ion-button>
+            <ion-button color="danger" (click)="resetImage(fileInput)" shape="round">Reset</ion-button>
+          </div>
+        }
+      }
+
+      <input 
+        type="file" 
+        accept="image/png" 
+        style="display:none;" 
+        (change)="onFileSelected($event)" 
+        #fileInput
+      >
+
+    </ion-content>
+  </ng-template>
+</ion-modal>

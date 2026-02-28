@@ -1,0 +1,170 @@
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  width:90%
+}
+
+.add-assessment-btn {
+  --border-radius: 50%;
+  --background: var(--ion-color-success);
+  --background-activated: var(--ion-color-success-shade);
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+  font-size: 1.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.add-assessment-btn:hover {
+  transform: scale(1.1);
+}
+
+.patient-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    margin-bottom: 20px;
+  }
+  
+  .assessment-card {
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .assessment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+  
+  .assessment-card ion-card-header {
+    background-color: var(--ion-color-light);
+  }
+  
+  .assessment-card ion-card-title {
+    color: var(--ion-color-primary);
+    font-weight: bold;
+  }
+  
+  .heatmap-container {
+    margin-top: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .heatmap-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .heatmap-full {
+    width:100%;
+    max-width:500px;
+    height: auto;
+    display: block;
+    margin:auto;
+  }
+  .heatmap-full-container{
+    padding: 1rem;
+  }
+  
+  .no-patient-selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+    color: var(--ion-color-medium);
+  }
+
+  ion-modal.fullscreen {
+    --width: 100%;
+    --height: 100%;
+  }
+
+  ion-item.full-width {
+    --width:100%;
+
+  }
+
+  .add-image-container{
+    /* border:2px dashed gray; */
+    height:400px;
+    width:400px;
+    margin:auto;
+    margin-top:2rem;
+    position:relative;
+    .add-image-placeholder {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+
+    }
+  }
+  .fit-parent {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  /* Container for the upload area */
+.add-image-placeholder {
+  width: 100%;
+  height: 300px; /* Fixed height is important for the image to fill 100% */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  margin-top: 10px;
+  overflow: hidden; /* Prevents image from spilling out */
+}
+
+/* The actual preview image */
+
+
+/* Heatmap in the card view */
+.heatmap-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.heatmap-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* assesments.css */
+
+/* Ensure the parent has a fixed height */
+.add-image-placeholder {
+  width: 100%;
+  height: 300px; /* Adjust this height to whatever you need */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #ccc;
+  /* Important: hides the parts of the image that get cropped out */
+  overflow: hidden; 
+  border-radius: 10px;
+  margin-top: 10px;
+  /* Optional: remove padding if you want edge-to-edge */
+  padding: 0; 
+}
+
+/* The actual preview image */
+.preview-image {
+  width: 100%;
+  height: 100%;
+  /* CHANGE THIS LINE: 'cover' makes it fill the space */
+  object-fit: cover; 
+  /* Optional: centers the image within the container */
+  object-position: center;
+}

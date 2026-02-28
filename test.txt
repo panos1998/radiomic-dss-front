@@ -1,0 +1,59 @@
+{
+    "resourceType": "Observation",
+    "id": "104",
+    "meta": {
+        "versionId": "1",
+        "lastUpdated": "2026-02-25T20:04:49.978+00:00",
+        "source": "#2WzBJDTkyTQIb9Vy"
+    },
+    "status": "final",
+    "code": {
+        "coding": [
+            {
+                "system": "http://loinc.org",
+                "code": "12345-6",
+                "display": "CT Slice Assessment"
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/1"
+    },
+    "valueQuantity": {
+        "value": 0,
+        "unit": "probability",
+        "system": "http://unitsofmeasure.org",
+        "code": "1"
+    },
+    "note": [
+        {
+            "text": "This GRAD-CAM (Gradient-weighted Class Activation Mapping) overlay provides a visual \"explanation\" of the AI model's decision-making process. \n\nThe heatmap highlights the anatomical regions the model prioritized: \n*   **Warmer colors (Red/Yellow):** Indicate areas of high importance that most heavily influenced the model’s specific prediction.\n*   **Cooler colors (Blue):** Represent areas that had little to no impact on the outcome.\n\n**Ethical Consideration:** \nThis tool is designed to provide transparency and build trust by allowing you to verify if the model is focusing on relevant clinical features or is being misled by image artifacts or \"shortcuts.\" In this specific scan, the predominately blue overlay suggests the model did not find strong localized evidence for its target class in this slice.\n\n**Clinical Accountability:**\nPlease remember that this is a **decision-support tool**, not a diagnostic replacement. Your expertise is required to ensure the model's focus aligns with medical reality. If the model highlights irrelevant areas, its prediction should be treated with caution. Your clinical judgment remains the final authority in the diagnostic process to ensure patient safety and equitable care."
+        }
+    ],
+    "component": [
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "12345-7",
+                        "display": "Radiomic Features"
+                    }
+                ]
+            },
+            "valueString": "\"/images/voxel_out_1\""
+        },
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "12345-8",
+                        "display": "GradCAM Path"
+                    }
+                ]
+            },
+            "valueString": "/images/gradcam_77377259-a322-4cd6-97b8-376b8ca1b6ac.png"
+        }
+    ]
+}

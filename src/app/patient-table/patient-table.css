@@ -1,0 +1,32 @@
+.header-row {
+    background-color: #f4f5f8; /* Light gray for header */
+    font-weight: bold;
+    border-bottom: 2px solid #d7d8da;
+  }
+  
+  .data-row {
+    border-bottom: 1px solid #e0e0e0; /* Separator for rows */
+    transition: background-color 0.3s;
+  }
+  
+  .data-row:hover {
+    background-color: #fafafa; /* Slight hover effect */
+  }
+  
+  ion-col {
+    padding: 12px 16px;
+  }
+
+  .loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Give it some space */
+  }
+
+  .empty-message {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+  }
+  

@@ -1,0 +1,36 @@
+@if (isLoading()) {
+  <div class="loader-container">
+    <ion-spinner name="lines"></ion-spinner>
+  </div>
+} @else {
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+            <ion-title>Patients</ion-title>
+        </ion-col>
+       
+    </ion-row>
+    <!-- Header Row -->
+    <ion-row class="header-row">
+      <ion-col>Name</ion-col>
+      <ion-col>Age</ion-col>
+      <ion-col>Gender</ion-col>
+    </ion-row>
+
+    <!-- Data Rows -->
+    @for (patient of patients(); track patient.id) {
+      <ion-row class="data-row" (click)="seeAssesments(patient.id)">
+        <ion-col>{{ patient.name }}</ion-col>
+        <ion-col>{{ patient.age }}</ion-col>
+        <ion-col>{{ patient.gender }}</ion-col>
+      </ion-row>
+    } @empty {
+      <!-- Show a message if there are no patients -->
+      <ion-row>
+          <ion-col class="empty-message">
+              <p>No patients found.</p>
+          </ion-col>
+      </ion-row>
+    }
+  </ion-grid>
+}
